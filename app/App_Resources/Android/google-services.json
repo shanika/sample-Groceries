@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "731087130157",
+    "firebase_url": "https://travelsocio-plan.firebaseio.com",
+    "project_id": "travelsocio-plan",
+    "storage_bucket": "travelsocio-plan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731087130157:android:fdb32a7862172e12",
+        "android_client_info": {
+          "package_name": "org.nativescript.groceries"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731087130157-mvvuh5oq2hukqu2m5gk4dq3s24m0l35o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.nativescript.groceries",
+            "certificate_hash": "0cfa59197541f22e5ca2dbf93aabe11b5040a82c"
+          }
+        },
+        {
+          "client_id": "731087130157-esj787mlooneh78l01nevqt1qtufcce9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkXjkr2mDSklynzEG-2Dqo5n3TSffuZ3w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731087130157-92vj8k6ohp62u4fpl2n70p5qfcgoeqp4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nativescript.TravelSocioNS"
+              }
+            },
+            {
+              "client_id": "731087130157-esj787mlooneh78l01nevqt1qtufcce9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

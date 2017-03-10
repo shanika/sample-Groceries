@@ -136,7 +136,7 @@ export class GroceriesComponent implements OnInit {
   }
 
   logoff() {
-    this.loginService.logoff();
+    
     this.router.navigate(["/login"]);
   }
 }

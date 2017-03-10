@@ -9,6 +9,7 @@ import { setStatusBarColors, BackendService, LoginService } from "./shared";
 
 import { LoginModule } from "./login/login.module";
 import { GroceriesModule } from "./groceries/groceries.module";
+import { MybucketModule } from "./mybucket/mybucket.module";
 
 setStatusBarColors();
 
@@ -25,6 +26,7 @@ setStatusBarColors();
     NativeScriptRouterModule.forRoot(appRoutes),
     LoginModule,
     GroceriesModule,
+    MybucketModule
   ],
   declarations: [
       AppComponent,

@@ -1,2 +1,14 @@
-<Button text="Log out"
-(tap)="logout()" ></Button>
+<ActionBar class="action-bar" title="My Bucket List">
+  <ActionItem (tap)="onLogout()">
+    <Button text="Log out" class="btn btn-primary"></Button>
+  </ActionItem>
+</ActionBar>
+<ListView class="list-group" [items]="items" (itemTap)="onItemTap($event)">
+    <template let-item="item">
+        <GridLayout class="list-group-item" rows="* *" columns="auto, *">
+            <Image row="0" col="0" rowSpan="2" [src]="item.img" class="thumb img-circle"></Image>
+            <Label row="0" col="1" [text]="item.title" class="list-group-item-heading"></Label>
+            <Label row="1" col="1" class="list-group-item-text" [text]="item.description"></Label>
+        </GridLayout>
+    </template>
+</ListView>

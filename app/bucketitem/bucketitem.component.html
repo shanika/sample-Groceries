@@ -1,0 +1,15 @@
+<ActionBar class="action-bar" title="Bucket Item">
+  <ActionItem (tap)="onLogout()">
+    <Button text="Log out" class="btn btn-primary"></Button>
+  </ActionItem>
+</ActionBar>
+
+<ScrollView sdkExampleTitle sdkToggleNavButton  (scroll)="onScroll($event)">
+    <FlexboxLayout flexDirection="column">
+        <Image #img style.zIndex="1" flexGrow="1" [src]="service.selectedItem.img"stretch="fill"></Image>
+        <FlexboxLayout #content style.zIndex="2" flexDirection="column">
+            <Label flexGrow="1" [text]="service.selectedItem.title" class="h2 p-l-15 p-r-15 p-t-15" textWrap="true"></Label>
+            <Label flexGrow="1" [text]="service.selectedItem.description" class="p-15" textWrap="true"></Label>
+        </FlexboxLayout>
+    </FlexboxLayout>
+</ScrollView>

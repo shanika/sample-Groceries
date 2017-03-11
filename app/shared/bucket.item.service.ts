@@ -10,14 +10,12 @@ export class BucketItemService {
     public selectedItem: any;
 
     constructor(private http: Http, private zone: NgZone) { 
-
     }
 
-    public getMyUncheckedItems() {
-
+    public getMyUncheckedItems(uid) {
         console.info("Inside service");
         let headers = this.getHeaders();
-        return this.http.get("http://192.168.1.7:8080/items", {
+        return this.http.get("http://192.168.1.7:8080/users/" + uid + "/items?checked=false", {
             "headers": headers
         })
         .map(res => res.json())

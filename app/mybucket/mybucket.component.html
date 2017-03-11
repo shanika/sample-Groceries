@@ -1,8 +1,17 @@
 <ActionBar class="action-bar" title="My Bucket List">
-  <ActionItem (tap)="onLogout()">
-    <Button text="Log out" class="btn btn-primary"></Button>
-  </ActionItem>
+    <ActionItem id="searchmenubutton"  icon="res://ic_search" automationText="Search" ></ActionItem>
+    <ActionItem id="searchmenubutton"  icon="res://ic_add" automationText="Search" ></ActionItem>
+    <ActionItem id="moremenubutton" (tap)="more()" icon="res://ic_menu" automationText="More" ></ActionItem>
 </ActionBar>
+
+<!--<StackLayout>
+  <GridLayout *ngFor="let item of items" columns="*,*" rows="*,*" >
+      <Image colSpan="2" [src]="item.img" stretch="none"></Image>
+      <Image class="img-rounded p-l-15 p-r-15 p-t-15" [src]="userService.currentUser.pic" stretch="none"></Image>
+      <Label row="0" col="1" [text]="item.title"></Label>
+  </GridLayout>
+</StackLayout>-->
+
 <ListView class="list-group" [items]="items" (itemTap)="onItemTap($event)">
     <template let-item="item">
         <GridLayout class="list-group-item" rows="* *" columns="auto, *">

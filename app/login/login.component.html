@@ -9,6 +9,7 @@
     <Label
       text="TravelBucket"
       class="initial-label"></Label>
+    <ActivityIndicator row="1" class="activity-indicator loading" width="100" height="100" busy="{{ isLoging }}"></ActivityIndicator>
     <StackLayout
       class="facebook-login"
       (tap)="facebookLogin()">

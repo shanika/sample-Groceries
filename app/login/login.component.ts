@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   user: User;
   isLoggingIn = true;
   isAuthenticating = false;
+  isLoging = false;
 
   constructor(private router: Router,
     private userService: LoginService,
@@ -56,14 +57,31 @@ export class LoginComponent implements OnInit {
   }
 
   googleLogin() {
+    this.isLoging = true;
     firebase.login({
     type: firebase.LoginType.GOOGLE
     }).then(
         (result) => {
-          BackendService.token = result.uid;
-          this.router.navigate(["/mybucket"]);
+
+          let user = {
+            "email": result.email,
+            "name": result.name,
+            "pic": result.profileImageURL,
+            "uid": result.uid
+          };
+
+          this.userService.logedInEvent(user)
+                    .subscribe( (res)=> {
+                      this.userService.currentUser = res;
+                      this.isLoging = false;
+                      this.router.navigate(["/mybucket"]);
+                    }, (errorMessage) => {
+                        this.isLoging = false;
+                        console.log(errorMessage);
+                    });
         },
         (errorMessage) => {
+          this.isLoging = false;
           console.log(errorMessage);
         }
     );

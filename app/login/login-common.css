@@ -18,7 +18,11 @@
 .initial-label {
   color: white;
   horizontal-align: center;
-  margin-bottom: 305;
+  margin-bottom: 20;
+}
+
+.loading {
+  margin-bottom: 100;
 }
 
 .facebook-login {

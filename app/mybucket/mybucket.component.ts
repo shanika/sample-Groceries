@@ -4,9 +4,11 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Page } from "ui/page";
+import * as dialogs from "ui/dialogs";
 
 import firebase = require("nativescript-plugin-firebase");
 import { BucketItemService } from "../shared/bucket.item.service";
+import { LoginService } from "../shared/login.service";
 
 @Component({
   selector: "my-bucket",
@@ -20,19 +22,19 @@ export class MybucketComponent implements OnInit {
   
   constructor(private router: Router, 
               private page: Page,
-              private service: BucketItemService){
+              private service: BucketItemService,
+              private userService: LoginService){
       console.info('Mybucket page');
   }
   
-
+  
   ngOnInit() {
     this.loadUncheckedItems();
   }
 
   public loadUncheckedItems() {
 
-    console.info("Calling service");
-    this.service.getMyUncheckedItems().subscribe(
+    this.service.getMyUncheckedItems(this.userService.currentUser.uid).subscribe(
       (res) => {
         this.items = res;
       },
@@ -52,6 +54,20 @@ export class MybucketComponent implements OnInit {
     console.info("Loged out");
     firebase.logout();
     this.router.navigate(["/login"]); 
+  }
+
+  public more() {
+    let options = {
+      title: "Select Action",
+      message: "Choose your acion",
+      cancelButtonText: "Cancel",
+      actions: ["Logout"]
+    };
+    dialogs.action(options).then((result) => {
+      if(result === "Logout"){
+        this.onLogout()
+      }
+    });
   }
   
 }

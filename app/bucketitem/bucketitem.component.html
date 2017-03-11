@@ -1,7 +1,6 @@
 <ActionBar class="action-bar" title="Bucket Item">
-  <ActionItem (tap)="onLogout()">
-    <Button text="Log out" class="btn btn-primary"></Button>
-  </ActionItem>
+  <ActionItem id="exampleMenuButton" (tap)="more()" icon="res://ic_menu" automationText="ExampleMenu" ></ActionItem>
+  <NavigationButton icon="res://ic_back" text="Go Back" (tap)="goBack()"></NavigationButton>
 </ActionBar>
 
 <ScrollView sdkExampleTitle sdkToggleNavButton  (scroll)="onScroll($event)">

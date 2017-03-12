@@ -4,20 +4,20 @@
     <ActionItem id="moremenubutton" (tap)="more()" icon="res://ic_menu" automationText="More" ></ActionItem>
 </ActionBar>
 
-<!--<StackLayout>
-  <GridLayout *ngFor="let item of items" columns="*,*" rows="*,*" >
-      <Image colSpan="2" [src]="item.img" stretch="none"></Image>
-      <Image class="img-rounded p-l-15 p-r-15 p-t-15" [src]="userService.currentUser.pic" stretch="none"></Image>
-      <Label row="0" col="1" [text]="item.title"></Label>
-  </GridLayout>
-</StackLayout>-->
+<ScrollView>
+    <StackLayout>
+        <FlexboxLayout flexWrap="wrap" class="m-t-15 m-l-15">
+            <Label class="p-5 text-center" text="Rotorua" borderRadius="5" backgroundColor="#ef5350"></Label>
+        </FlexboxLayout>
+        <FlexboxLayout flexWrap="wrap" justifyContent="space-between" class="p-10">
+            <GridLayout *ngFor="let item of items" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item)">
+                <StackLayout class="card-img" row="0" col="0" colSpan="4" rowSpan="3" [style]="getImageStyle(item.img)">
+                </StackLayout>
+                <Image row="3" col="0" [src]="userService.currentUser.pic" class="item-profile"></Image>
+                <Label row="3" col="1" [text]="item.title" colSpan="3" class="body" class="item-title m-t-5" textWrap="true"></Label>
+            </GridLayout>
+        </FlexboxLayout>
+    </StackLayout>
+</ScrollView>
 
-<ListView class="list-group" [items]="items" (itemTap)="onItemTap($event)">
-    <template let-item="item">
-        <GridLayout class="list-group-item" rows="* *" columns="auto, *">
-            <Image row="0" col="0" rowSpan="2" [src]="item.img" class="thumb img-circle"></Image>
-            <Label row="0" col="1" [text]="item.title" class="list-group-item-heading"></Label>
-            <Label row="1" col="1" class="list-group-item-text" [text]="item.description"></Label>
-        </GridLayout>
-    </template>
-</ListView>
+

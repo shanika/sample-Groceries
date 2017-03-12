@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Page } from "ui/page";
 import * as dialogs from "ui/dialogs";
+import scrollViewModule = require("ui/scroll-view");
 
 import firebase = require("nativescript-plugin-firebase");
 import { BucketItemService } from "../shared/bucket.item.service";
@@ -18,16 +19,16 @@ import { LoginService } from "../shared/login.service";
 })
 export class MybucketComponent implements OnInit {
 
-  items: any = [];
+  items: any = []; 
   
   constructor(private router: Router, 
               private page: Page,
               private service: BucketItemService,
               private userService: LoginService){
-      console.info('Mybucket page');
+      console.info('Mybucket page');  
   }
-  
-  
+    
+
   ngOnInit() {
     this.loadUncheckedItems();
   }
@@ -37,20 +38,20 @@ export class MybucketComponent implements OnInit {
     this.service.getMyUncheckedItems(this.userService.currentUser.uid).subscribe(
       (res) => {
         this.items = res;
-      },
+      }, 
       () => {
         console.error("Unable to fetch item data");
       }
     );
   }
+ 
+  public onItemTap(item) {
 
-  public onItemTap(args) {
-
-    this.service.selectedItem = this.items[args.index];
-    this.router.navigate(["/bucketitem"]);
+    this.service.selectedItem = item;
+    this.router.navigate(["/bucketitem"]);  
   }
 
-  public onLogout() {
+  public onLogout() { 
     console.info("Loged out");
     firebase.logout();
     this.router.navigate(["/login"]); 
@@ -65,9 +66,13 @@ export class MybucketComponent implements OnInit {
     };
     dialogs.action(options).then((result) => {
       if(result === "Logout"){
-        this.onLogout()
+        this.onLogout();  
       }
     });
+  }
+
+  public getImageStyle(img) {
+    return "background-image: url('" + img + "');"
   }
   
 }

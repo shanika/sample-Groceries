@@ -12,10 +12,11 @@ import { Image } from "ui/image";
 import { FlexboxLayout } from "ui/layouts/flexbox-layout";
 import { ScrollEventData } from "ui/scroll-view";
 import { RouterExtensions } from "nativescript-angular/router";
+import { LoginService } from "../shared/login.service";
 
 
 @Component({
-  selector: "bucket-item",
+  selector: "bucket-item", 
   moduleId: module.id,
   templateUrl: "./bucketitem.component.html",
   styleUrls: ["./bucketitem-common.css", "./bucketitem.component.css"]
@@ -24,6 +25,7 @@ export class BucketitemComponent implements OnInit {
 
   public image: Image;
   public flex: FlexboxLayout;
+  public busy: boolean = false;
 
   @ViewChild("img") img: ElementRef;
   @ViewChild("content") content: ElementRef;
@@ -31,7 +33,8 @@ export class BucketitemComponent implements OnInit {
   constructor(private router: Router,
               private routerExtensions: RouterExtensions, 
               private page: Page,
-              private service: BucketItemService){
+              private service: BucketItemService,
+              private userService: LoginService){
       console.info('Bucket item page'); 
   }
   
@@ -60,6 +63,39 @@ export class BucketitemComponent implements OnInit {
         this.onLogout()
       }
     });
+  }
+
+  public addToBucket(){ 
+    this.busy = true;
+    this.service.addToBucket(this.userService.currentUser, this.service.selectedItem)
+    .subscribe(
+      () => {
+        this.service.selectedItem['bucketed'] = true;
+        this.busy = false;
+        this.service.myBucket.push(this.service.selectedItem);
+        this.service.selectedIndex = this.service.myBucket.length - 1;
+      },
+      () => {
+        this.busy = false;
+        console.error("Failed to add item to bucket");
+      }
+    );
+  }
+
+  public removeFromBucket(){ 
+    this.busy = true;
+    this.service.removeFromBucket(this.userService.currentUser, this.service.selectedItem)
+    .subscribe(
+      () => {
+        this.service.selectedItem['bucketed'] = false;
+        this.busy = false;
+        this.service.myBucket.splice(this.service.selectedIndex, 1);
+      },
+      () => {
+        this.busy = false;
+        console.error("Failed to remove item to bucket");
+      }
+    ); 
   }
 
   onScroll(args: ScrollEventData) {

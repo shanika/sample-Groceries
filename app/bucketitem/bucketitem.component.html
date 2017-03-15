@@ -6,9 +6,21 @@
 <ScrollView sdkExampleTitle sdkToggleNavButton  (scroll)="onScroll($event)">
     <FlexboxLayout flexDirection="column">
         <Image #img style.zIndex="1" flexGrow="1" [src]="service.selectedItem.img"stretch="fill"></Image>
+        <FlexboxLayout class="item-status-cont">
+                <ActivityIndicator width="55" height="55" [busy]="busy" class="activity-indicator m-15" ></ActivityIndicator>
+                <Label class="item-status" *ngIf="!busy && !service.selectedItem.bucketed" text="Add Item" class="p-15"></Label>
+                <Image *ngIf="!busy && !service.selectedItem.bucketed" src="res://ic_item_add" stretch ="none" class="m-15" (tap)="addToBucket()"></Image>
+
+                <Label class="item-status" *ngIf="!busy && service.selectedItem.bucketed && !service.selectedItem.checked" text="Bucket Item" class="p-15"></Label>
+                <Image *ngIf="!busy && service.selectedItem.bucketed && !service.selectedItem.checked" src="res://ic_item_bucketed" stretch ="none" 
+                class="m-15" (tap)="removeFromBucket()"></Image>
+
+                <Label class="item-status" *ngIf="!busy && service.selectedItem.bucketed && service.selectedItem.checked" text="Checked Item" class="p-15"></Label>
+                <Image *ngIf="!busy && service.selectedItem.bucketed && service.selectedItem.checked" src="res://ic_item_checked" stretch ="none" class="m-15"></Image> 
+        </FlexboxLayout>
         <FlexboxLayout #content style.zIndex="2" flexDirection="column">
             <Label flexGrow="1" [text]="service.selectedItem.title" class="h2 p-l-15 p-r-15 p-t-15" textWrap="true"></Label>
             <Label flexGrow="1" [text]="service.selectedItem.description" class="p-15" textWrap="true"></Label>
         </FlexboxLayout>
-    </FlexboxLayout>
+    </FlexboxLayout> 
 </ScrollView>

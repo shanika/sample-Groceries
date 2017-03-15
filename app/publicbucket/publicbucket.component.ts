@@ -12,12 +12,14 @@ import { BucketItemService } from "../shared/bucket.item.service";
 import { LoginService } from "../shared/login.service";
 
 @Component({
-  selector: "my-bucket",
+  selector: "public-bucket",
   moduleId: module.id,
-  templateUrl: "./mybucket.component.html",
-  styleUrls: ["./mybucket-common.css", "./mybucket.component.css"]
+  templateUrl: "./publicbucket.component.html",
+  styleUrls: ["./publicbucket-common.css", "./publicbucket.component.css"]
 })
-export class MybucketComponent implements OnInit { 
+export class PublicbucketComponent implements OnInit {
+
+  items: any = []; 
   
   constructor(private router: Router, 
               private page: Page,
@@ -33,9 +35,9 @@ export class MybucketComponent implements OnInit {
 
   public loadUncheckedItems() {
 
-    this.service.getItems(this.userService.currentUser.uid, "?checked=false").subscribe(
+    this.service.getItems(this.userService.currentUser.uid, "").subscribe(
       (res) => {
-        this.service.myBucket = res;
+        this.items = res;
       }, 
       () => {
         console.error("Unable to fetch item data");
@@ -43,14 +45,10 @@ export class MybucketComponent implements OnInit {
     );
   }
  
-  public onItemTap(item, index) {
-    this.service.selectedIndex = index;
+  public onItemTap(item) {
+
     this.service.selectedItem = item;
     this.router.navigate(["/bucketitem"]);  
-  }
-
-  public onAddIconClick() {
-    this.router.navigate(["/publicbucket"]); 
   }
 
   public onLogout() { 

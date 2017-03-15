@@ -8,17 +8,21 @@ import { MybucketComponent } from "./mybucket.component";
 import { BucketitemComponent } from "../bucketitem/bucketitem.component";
 import { bucketitemRouting } from "../bucketitem/bucketitem.routing";
 import { BucketItemService } from "../shared/bucket.item.service";
+import { PublicbucketComponent } from "../publicbucket/publicbucket.component";
+import { publicbucketRouting } from "../publicbucket/publicbucket.routing";
 
 @NgModule({
   imports: [
     NativeScriptModule,
     NativeScriptFormsModule,
     mybucketRouting,
-    bucketitemRouting
+    bucketitemRouting,
+    publicbucketRouting
   ],
   declarations: [
     MybucketComponent,
-    BucketitemComponent
+    BucketitemComponent,
+    PublicbucketComponent
   ],
   providers: [BucketItemService],
   schemas: [NO_ERRORS_SCHEMA]

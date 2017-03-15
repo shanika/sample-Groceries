@@ -1,0 +1,23 @@
+.item-card {
+    width: 45%;
+    height: 220;
+}
+
+.card-img {
+    background-color: #BBBBBB;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 8;
+}
+
+.item-title {
+    color: #000000;
+    font-style: oblique;
+}
+
+.item-profile {
+    width:27 !important;
+    height:27 !important;
+    border-radius: 20;
+}

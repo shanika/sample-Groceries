@@ -1,0 +1,8 @@
+.item-status {
+    color: #00caab;
+}
+
+.item-status-cont {
+    justify-content : flex-end;
+    align-items: center;
+}

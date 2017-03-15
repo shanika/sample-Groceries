@@ -1,6 +1,5 @@
-<ActionBar class="action-bar" title="My Bucket List">
+<ActionBar class="action-bar" title="Add">
     <ActionItem id="searchmenubutton"  icon="res://ic_search" automationText="Search" ></ActionItem>
-    <ActionItem id="searchmenubutton"  icon="res://ic_add" automationText="Add" (tap)="onAddIconClick()"></ActionItem>
     <ActionItem id="moremenubutton" (tap)="more()" icon="res://ic_menu" automationText="More" ></ActionItem>
 </ActionBar>
 
@@ -10,7 +9,7 @@
             <Label class="p-5 text-center" text="Rotorua" borderRadius="5" backgroundColor="#ef5350"></Label>
         </FlexboxLayout>
         <FlexboxLayout flexWrap="wrap" justifyContent="space-between" class="p-10">
-            <GridLayout *ngFor="let item of service.myBucket; let i = index" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item, i)">
+            <GridLayout *ngFor="let item of items" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item)">
                 <StackLayout class="card-img" row="0" col="0" colSpan="4" rowSpan="3" [style]="getImageStyle(item.img)">
                 </StackLayout>
                 <Image row="3" col="0" [src]="userService.currentUser.pic" class="item-profile"></Image>

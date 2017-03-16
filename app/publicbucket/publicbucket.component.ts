@@ -10,6 +10,7 @@ import scrollViewModule = require("ui/scroll-view");
 import firebase = require("nativescript-plugin-firebase");
 import { BucketItemService } from "../shared/bucket.item.service";
 import { LoginService } from "../shared/login.service";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
   selector: "public-bucket",
@@ -23,6 +24,7 @@ export class PublicbucketComponent implements OnInit {
   
   constructor(private router: Router, 
               private page: Page,
+              private routerExtensions: RouterExtensions,
               private service: BucketItemService,
               private userService: LoginService){
       console.info('Mybucket page');  
@@ -73,6 +75,10 @@ export class PublicbucketComponent implements OnInit {
 
   public getImageStyle(img) {
     return "background-image: url('" + img + "');"
+  }
+
+  public goBack() {
+    this.routerExtensions.backToPreviousPage();
   }
   
 }

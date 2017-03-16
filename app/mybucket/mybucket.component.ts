@@ -18,6 +18,8 @@ import { LoginService } from "../shared/login.service";
   styleUrls: ["./mybucket-common.css", "./mybucket.component.css"]
 })
 export class MybucketComponent implements OnInit { 
+
+  public filterTags: string[] = ['Rotorua']; 
   
   constructor(private router: Router, 
               private page: Page,

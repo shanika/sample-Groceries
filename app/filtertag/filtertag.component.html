@@ -1,0 +1,4 @@
+<StackLayout #tagContainer [width]="tagWidth" [backgroundColor]="color" orientation="horizontal" class="filter-tag m-l-5 m-r-5 p-l-5 p-r-5">
+    <Label class="p-5 text-center" [text]="name" #tagName></Label> 
+    <Image src="res://ic_close" stretch="none" class="tag-close" (tap)="onRemove()"></Image>
+</StackLayout>

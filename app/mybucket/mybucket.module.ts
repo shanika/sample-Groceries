@@ -10,6 +10,7 @@ import { bucketitemRouting } from "../bucketitem/bucketitem.routing";
 import { BucketItemService } from "../shared/bucket.item.service";
 import { PublicbucketComponent } from "../publicbucket/publicbucket.component";
 import { publicbucketRouting } from "../publicbucket/publicbucket.routing";
+import { FiltertagComponent } from "../filtertag/filtertag.component";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { publicbucketRouting } from "../publicbucket/publicbucket.routing";
   declarations: [
     MybucketComponent,
     BucketitemComponent,
-    PublicbucketComponent
+    PublicbucketComponent,
+    FiltertagComponent
   ],
   providers: [BucketItemService],
   schemas: [NO_ERRORS_SCHEMA]

@@ -10,6 +10,7 @@ export class BucketItemService {
     public selectedItem: any;
     public selectedIndex: number;
     public myBucket:any = [];
+    public bucketFilters = [];
 
     constructor(private http: Http, private zone: NgZone) { 
     }

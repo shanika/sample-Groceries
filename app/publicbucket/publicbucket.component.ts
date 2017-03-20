@@ -21,6 +21,12 @@ import { RouterExtensions } from "nativescript-angular/router";
 export class PublicbucketComponent implements OnInit {
 
   items: any = []; 
+
+  public loading: boolean = false;
+  public showSearchBar:boolean = false;
+  public title:string = "My Bucket";
+  public searchPhrase:string = "";
+  public filterTags: string[] = ['New Zealand'];
   
   constructor(private router: Router, 
               private page: Page,
@@ -32,17 +38,20 @@ export class PublicbucketComponent implements OnInit {
     
 
   ngOnInit() {
-    this.loadUncheckedItems();
+    this.loadItems();
   }
 
-  public loadUncheckedItems() {
+  public loadItems() {
 
+    this.loading = true;
     this.service.getItems(this.userService.currentUser.uid, "").subscribe(
       (res) => {
         this.items = res;
+        this.loading = false;
       }, 
       () => {
         console.error("Unable to fetch item data");
+        this.loading = false;
       }
     );
   }
@@ -59,22 +68,22 @@ export class PublicbucketComponent implements OnInit {
     this.router.navigate(["/login"]); 
   }
 
-  public more() {
-    let options = {
-      title: "Select Action",
-      message: "Choose your acion",
-      cancelButtonText: "Cancel",
-      actions: ["Logout"]
-    };
-    dialogs.action(options).then((result) => {
-      if(result === "Logout"){
-        this.onLogout();  
-      }
-    });
+
+  public onRemoveTagFilter(tag,i) {
+    this.filterTags.splice(i, 1); 
+    this.loadItems(); 
   }
 
   public getImageStyle(img) {
     return "background-image: url('" + img + "');"
+  }
+
+  public addItem(tag:string) {
+    if(tag && tag.trim()) {
+        this.filterTags.push(tag.trim());
+    }
+    this.searchPhrase = undefined;
+    this.loadItems();
   }
 
   public goBack() {

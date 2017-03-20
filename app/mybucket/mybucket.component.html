@@ -12,10 +12,9 @@
             <filter-tag *ngFor="let tag of service.bucketFilters; let i = index" [name]="tag" (remove)="onRemoveTagFilter(tag,i)"></filter-tag>   
         </FlexboxLayout>
     </ScrollView>
-    <!--<ActivityIndicator style.zIndex="101" [busy]="loading" height="70" top="70" left="50%" class="activity-indicator" ></ActivityIndicator>-->
 </AbsoluteLayout>
 
-<ActivityIndicator style.zIndex="101" [busy]="loading" height="70" class="activity-indicator" ></ActivityIndicator>
+<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
 <ScrollView style.zIndex="1">
     <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10" [ngClass]="{'item-container' : service.bucketFilters.length}">
         <GridLayout *ngFor="let item of service.myBucket; let i = index" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item, i)">

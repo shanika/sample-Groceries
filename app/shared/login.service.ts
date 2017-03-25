@@ -3,6 +3,7 @@
 import { Injectable, NgZone } from "@angular/core";
 import { Http, RequestOptions, Headers } from "@angular/http";
 import { Observable } from "rxjs/Observable";
+import { BackendService } from "./backend.service";
 
 @Injectable()
 export class LoginService {
@@ -16,7 +17,7 @@ export class LoginService {
     
       let headers = this.getHeaders();
       let options = new RequestOptions({ headers: headers });
-      return this.http.post("http://192.168.1.7:8080/event/logedIn", user, options)
+      return this.http.post(BackendService.apiUrl + "/event/logedIn", user, options)
             .map(res => res.json())
             .catch(this.handleErrors); ;
   }

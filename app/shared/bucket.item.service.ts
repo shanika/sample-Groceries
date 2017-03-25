@@ -2,7 +2,10 @@
 
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers, RequestOptions } from "@angular/http";
-import { Observable } from "rxjs/Observable";
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import { BackendService } from "./backend.service";
+
 
 @Injectable()
 export class BucketItemService {
@@ -18,7 +21,7 @@ export class BucketItemService {
     public getItems(uid, checked) {
         console.info("Inside service");
         let headers = this.getHeaders();
-        return this.http.get("http://192.168.1.7:8080/users/" + uid + "/items" + checked, {
+        return this.http.get(BackendService.apiUrl + "/users/" + uid + "/items" + checked, {
             "headers": headers
         })
         .map(res => res.json())
@@ -28,7 +31,7 @@ export class BucketItemService {
     public addToBucket(user, item) {
         let headers = this.getHeaders();
         let options = new RequestOptions({ headers: headers });
-        return this.http.post("http://192.168.1.7:8080/users/" + user.uid + "/items/"  + item.id, {}, options)
+        return this.http.post( BackendService.apiUrl + "/users/" + user.uid + "/items/"  + item.id, {}, options)
             .map(res => res.json())
             .catch(this.handleErrors); ;
     }
@@ -36,7 +39,7 @@ export class BucketItemService {
     public removeFromBucket(user, item) {
         let headers = this.getHeaders();
         let options = new RequestOptions({ headers: headers });
-        return this.http.post("http://192.168.1.7:8080/users/" + user.uid + "/delete/items/"  + item.id, {}, options)
+        return this.http.post( BackendService.apiUrl + "/users/" + user.uid + "/delete/items/"  + item.id, {}, options)
             .map(res => res.json())
             .catch(this.handleErrors);
     }

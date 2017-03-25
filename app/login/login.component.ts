@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
       scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
     }).then(
         function (result) {
-          BackendService.token = result.uid;
+          
         },
         function (errorMessage) {
           console.log(errorMessage);

@@ -20,6 +20,7 @@
 
 .item-state {
     flex-direction: row-reverse;
+    border-top: solid 1 #BBBBBB;
 }
 
 .item-title-top {
@@ -54,8 +55,6 @@
 .scroll-view {
     background-color: #F5F5F5;
 }
-
-
 
 .tag-container {
     justify-content: flex-start;

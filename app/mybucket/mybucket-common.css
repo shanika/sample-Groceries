@@ -46,12 +46,6 @@
     font-size: 12; 
 }
 
-.item-profile {
-    width:27 !important;
-    height:27 !important;
-    border-radius: 20;
-}
-
 .scroll-view {
     background-color: #F5F5F5;
 }

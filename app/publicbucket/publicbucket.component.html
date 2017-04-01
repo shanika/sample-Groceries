@@ -11,18 +11,6 @@
     </ScrollView>
 </AbsoluteLayout>
 
-<!--<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
-<ScrollView style.zIndex="1">
-    <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10" [ngClass]="{'item-container' : items.length}">
-        <GridLayout *ngFor="let item of items; let i = index" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item, i)">
-            <StackLayout class="card-img" row="0" col="0" colSpan="4" rowSpan="3" [style]="getImageStyle(item.img)">
-            </StackLayout>
-            <Image row="3" col="0" [src]="userService.currentUser.pic" class="item-profile"></Image>
-            <Label row="3" col="1" [text]="item.title" colSpan="3" class="body" class="item-title m-t-5" textWrap="true"></Label>
-        </GridLayout>
-    </FlexboxLayout>
-</ScrollView>-->
-
 <ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
 <ScrollView style.zIndex="1" class="scroll-view">
     <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10" [ngClass]="{'item-container' : filterTags.length}">

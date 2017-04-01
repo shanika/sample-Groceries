@@ -11,7 +11,7 @@
     </ScrollView>
 </AbsoluteLayout>
 
-<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
+<!--<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
 <ScrollView style.zIndex="1">
     <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10" [ngClass]="{'item-container' : items.length}">
         <GridLayout *ngFor="let item of items; let i = index" class="item-card m-b-15" columns="*,*,*,*" rows="*,*,*,*" (tap)="onItemTap(item, i)">
@@ -20,6 +20,23 @@
             <Image row="3" col="0" [src]="userService.currentUser.pic" class="item-profile"></Image>
             <Label row="3" col="1" [text]="item.title" colSpan="3" class="body" class="item-title m-t-5" textWrap="true"></Label>
         </GridLayout>
+    </FlexboxLayout>
+</ScrollView>-->
+
+<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
+<ScrollView style.zIndex="1" class="scroll-view">
+    <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10" [ngClass]="{'item-container' : filterTags.length}">
+        <FlexboxLayout *ngFor="let item of items; let i = index" class="item-card m-b-15" (tap)="onItemTap(item, i)">
+            <FlexboxLayout class="card-img" [style]="getImageStyle(item.img)">
+                <Label [text]="item.title" class="item-title-top" textWrap="true"></Label>
+            </FlexboxLayout>
+            <StackLayout class="item-title-container" orientation="vertical">
+                <Label text="#Rotorua, #Hicking, #Adventure" class="item-tags m-t-5 m-l-5 m-r-5" textWrap="true"></Label>
+            </StackLayout>
+            <FlexboxLayout class="item-state">
+                <Image *ngIf="item.bucketed" src="res://ic_bucket" class="m-r-5" stretch ="none" ></Image>
+            </FlexboxLayout>
+        </FlexboxLayout>
     </FlexboxLayout>
 </ScrollView>
 

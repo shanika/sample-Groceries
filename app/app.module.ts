@@ -14,6 +14,8 @@ import { Location } from "@angular/common";
 import {NavComponent} from "./nav/nav.component";
 import {FeedComponent} from "./nav/feed/feed.component";
 import {BucketComponent} from "./nav/bucket/bucket.component";
+import {WorldComponent} from "./nav/world/world.component";
+import {TripsComponent} from "./nav/trips/trips.component";
 
 setStatusBarColors();
 
@@ -35,7 +37,9 @@ setStatusBarColors();
       AppComponent,
       NavComponent,
       FeedComponent,
-      BucketComponent
+      BucketComponent,
+      WorldComponent,
+      TripsComponent
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]

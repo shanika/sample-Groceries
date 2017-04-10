@@ -58,9 +58,11 @@ export class NavComponent {
                 break;
             case 2:
                 this.actionTitle = "World"
+                this.router.navigate(["/nav/world"]);
                 break;
             case 3:
                 this.actionTitle = "Trips"
+                this.router.navigate(["/nav/trips"]);
                 break;
         }
 

@@ -2,6 +2,8 @@ import {AuthGuard} from "./auth-guard.service";
 import {FeedComponent} from "./nav/feed/feed.component";
 import {NavComponent} from "./nav/nav.component";
 import {BucketComponent} from "./nav/bucket/bucket.component";
+import {WorldComponent} from "./nav/world/world.component";
+import {TripsComponent} from "./nav/trips/trips.component";
 
 export const authProviders = [
     AuthGuard
@@ -14,7 +16,9 @@ export const appRoutes = [
         children: [
             {path: "", redirectTo: 'feed', pathMatch: "full"},
             {path: "feed", component: FeedComponent},
-            {path: "bucket", component: BucketComponent}
+            {path: "bucket", component: BucketComponent},
+            {path: "world", component: WorldComponent},
+            {path: "trips", component: TripsComponent}
         ]
     }
 ];

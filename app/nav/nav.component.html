@@ -1,0 +1,9 @@
+<ActionBar [title]="actionTitle">
+</ActionBar>
+
+<GridLayout rows="*, auto">
+    <router-outlet></router-outlet>
+    <GridLayout row="1">
+        <BottomBar row="1" [items]="items" (tabSelected)="tabSelected($event)" [hide]="hidden" titleState="{{titleState}}" (loaded)="bottomBarLoaded()"></BottomBar>
+    </GridLayout>
+</GridLayout>

@@ -9,6 +9,11 @@ import { setStatusBarColors, BackendService, LoginService } from "./shared";
 
 import { LoginModule } from "./login/login.module";
 import { MybucketModule } from "./mybucket/mybucket.module";
+import {Router} from "@angular/router";
+import { Location } from "@angular/common";
+import {NavComponent} from "./nav/nav.component";
+import {FeedComponent} from "./nav/feed/feed.component";
+import {BucketComponent} from "./nav/bucket/bucket.component";
 
 setStatusBarColors();
 
@@ -28,8 +33,19 @@ setStatusBarColors();
   ],
   declarations: [
       AppComponent,
+      NavComponent,
+      FeedComponent,
+      BucketComponent
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {
+
+
+  constructor(router: Router, private location: Location) {
+    router.events.subscribe((e) => {
+      console.log("--EVENT-->: " + e.toString());
+    });
+  }
+}

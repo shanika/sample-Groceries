@@ -1,16 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { Color } from "color";
-import { connectionType, getConnectionType } from "connectivity";
-import { Animation } from "ui/animation";
-import { View } from "ui/core/view";
-import { prompt } from "ui/dialogs";
-import { Page } from "ui/page";
-import { TextField } from "ui/text-field";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {Page} from "ui/page";
+import {LoginService, User} from "../shared";
 
 import firebase = require("nativescript-plugin-firebase");
-
-import { alert, LoginService, User, BackendService } from "../shared";
 
 
 @Component({
@@ -74,7 +67,7 @@ export class LoginComponent implements OnInit {
                     .subscribe( (res)=> {
                       this.userService.currentUser = res;
                       this.isLoging = false;
-                      this.router.navigate(["/mybucket"]);
+                      this.router.navigate(["/nav"]);
                     }, (errorMessage) => {
                         this.isLoging = false;
                         console.log(errorMessage);

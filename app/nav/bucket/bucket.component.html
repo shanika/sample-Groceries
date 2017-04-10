@@ -1,1 +1,16 @@
-<Label text="Bucket Component"></Label>
+<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
+<ScrollView style.zIndex="1" class="scroll-view">
+    <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10">
+        <FlexboxLayout *ngFor="let item of service.myBucket; let i = index" class="item-card m-b-15" (tap)="onItemTap(item, i)">
+            <FlexboxLayout class="card-img" [style]="getImageStyle(item.img)">
+                <Label [text]="item.title" class="item-title-top" textWrap="true"></Label>
+            </FlexboxLayout>
+            <StackLayout class="item-title-container" orientation="vertical">
+                <Label text="#Rotorua, #Hicking, #Adventure" class="item-tags m-t-5 m-l-5 m-r-5" textWrap="true"></Label>
+            </StackLayout>
+            <FlexboxLayout class="item-state">
+                <Image *ngIf="item.bucketed" src="res://ic_bucket" class="m-r-5" stretch ="none" ></Image>
+            </FlexboxLayout>
+        </FlexboxLayout>
+    </FlexboxLayout>
+</ScrollView>

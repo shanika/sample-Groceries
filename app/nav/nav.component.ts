@@ -1,11 +1,10 @@
 import {Component} from "@angular/core";
-import {registerElement} from 'nativescript-angular';
-import {BottomBar, BottomBarItem, TITLE_STATE, SelectedIndexChangedEventData} from 'nativescript-bottombar';
-import {Observable} from "rxjs";
+import {registerElement} from "nativescript-angular";
+import {BottomBar, BottomBarItem, TITLE_STATE, SelectedIndexChangedEventData} from "nativescript-bottombar";
 import "rxjs/add/operator/map";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Page} from "ui/page";
-import { Location } from "@angular/common";
+import {Location} from "@angular/common";
 
 registerElement('BottomBar', () => BottomBar);
 

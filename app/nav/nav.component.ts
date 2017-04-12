@@ -21,7 +21,7 @@ export class NavComponent {
     public hidden: boolean;
     public titleState: TITLE_STATE;
 
-    public actionTitle: string = "TravelSocio"
+    public actionTitle: string = "TravelSocio";
 
     public items: Array<BottomBarItem> = [
         new BottomBarItem(0, "Feed", "ic_feed", "#009688"),
@@ -30,24 +30,39 @@ export class NavComponent {
         new BottomBarItem(3, "Trips", "ic_trip", "#009688")
     ];
 
-    constructor(private location: Location,private router: Router, private userService: LoginService) {
+    constructor(private router: Router) {
 
         this.selectedIndex = 0;
         this.hidden = false;
         this.titleState = TITLE_STATE.ALWAYS_SHOW;
+
+
+
+        var url: string = this.router.url.split(";")[0];
+        console.info("route " + url);
+        if (url == "/nav/feed") {
+            this.selectedIndex = 0;
+        } else if (url == "/nav/bucket") {
+            this.selectedIndex = 1;
+        } else if (url == "/nav/world") {
+            this.selectedIndex = 2;
+        } else {
+            this.selectedIndex = 3;
+        }
+
+        console.info("bb index " + this.selectedIndex);
     }
 
     tabSelected(args: SelectedIndexChangedEventData) {
 
         if (args.newIndex !== args.oldIndex) {
-            this.selectedIndex = args.newIndex;
-            this.navigate();
+            this.navigate(args.newIndex);
         }
     }
 
-    private navigate() {
+    private navigate(index) {
 
-        switch (this.selectedIndex) {
+        switch (index) {
             case 0:
                 this.actionTitle = "TravelSocio";
                 this.router.navigate(["/nav/feed"]);
@@ -71,9 +86,4 @@ export class NavComponent {
     bottomBarLoaded() {
 
     }
-
-    goBack() {
-        this.location.back();
-    }
-
 }

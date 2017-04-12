@@ -1,8 +1,9 @@
-import {Component} from "@angular/core";
+import {Component, ElementRef, ViewChild, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {RouterExtensions} from "nativescript-angular";
 import {BucketItemService} from "../shared/bucket.item.service";
 import {Page} from "ui/page";
+import {TextField} from "ui/text-field";
 
 @Component({
     selector: "search-page",
@@ -10,9 +11,18 @@ import {Page} from "ui/page";
     templateUrl: "search.component.html",
     styleUrls: ["./search-common.css", "./search.component.css"]
 })
-export class SearchComponent {
-
+export class SearchComponent implements OnInit{
     mode:string;
+
+
+    @ViewChild("srch")
+    searchElement: ElementRef;
+
+    searchInput: TextField;
+
+    ngOnInit(): void {
+        this.searchInput = this.searchElement.nativeElement;
+    }
 
     constructor(route: ActivatedRoute,
                 private routerExtentions: RouterExtensions,
@@ -22,10 +32,9 @@ export class SearchComponent {
 
     goBack() {
 
+        this.searchInput.dismissSoftInput();
         if(this.mode == "bucket") {
-            this.routerExtentions.navigate(["/nav/bucket"], { transition: {
-                name : "fade"
-            } });
+            this.routerExtentions.navigate(["/nav/bucket"], { animated : false });
         }
     }
 
@@ -36,9 +45,7 @@ export class SearchComponent {
             console.info(this.service.bucketFilters.length)
         }
 
-        this.routerExtentions.navigate(["/nav/bucket"], { transition: {
-            name : "fade"
-        } });
+        this.routerExtentions.navigate(["/nav/bucket"], { animated : false });
     }
 
 }

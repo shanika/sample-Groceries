@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {BucketItemService} from "../../shared/bucket.item.service";
 import {LoginService} from "../../shared/login.service";
 import {Router} from "@angular/router";
+import {RouterExtensions} from "nativescript-angular";
 
 @Component({
     selector: "nav-bucket",
@@ -15,11 +16,17 @@ export class BucketComponent implements OnInit{
 
     constructor(private service: BucketItemService,
                 private userService: LoginService,
-                private router: Router) {
+                private router: Router,
+                private routerExtentions: RouterExtensions) {
     }
 
     ngOnInit() {
-        this.loadUncheckedItems();
+
+        if(!this.service.myBucket.length) {
+            this.loadUncheckedItems();
+        }
+
+        console.info(this.service.bucketFilters.length);
     }
 
     public loadUncheckedItems() {
@@ -41,6 +48,17 @@ export class BucketComponent implements OnInit{
         this.service.selectedIndex = index;
         this.service.selectedItem = item;
         this.router.navigate(["/bucketitem"]);
+    }
+
+    public onRemoveTagFilter(tag,i) {
+        this.service.bucketFilters.splice(i, 1);
+        this.loadUncheckedItems();
+    }
+
+    public addSearchCriteria() {
+        this.routerExtentions.navigate(["/search/bucket"], { transition: {
+            name : "fade"
+        } });
     }
 
     public getImageStyle(img) {

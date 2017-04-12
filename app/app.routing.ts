@@ -4,6 +4,7 @@ import {NavComponent} from "./nav/nav.component";
 import {BucketComponent} from "./nav/bucket/bucket.component";
 import {WorldComponent} from "./nav/world/world.component";
 import {TripsComponent} from "./nav/trips/trips.component";
+import {SearchComponent} from "./search/search.component";
 
 export const authProviders = [
     AuthGuard
@@ -11,6 +12,7 @@ export const authProviders = [
 
 export const appRoutes = [
     {path: "", redirectTo: "/login", pathMatch: "full"},
+    {path: "search/:mode", component : SearchComponent },
     {
         path: "nav", component: NavComponent,
         children: [

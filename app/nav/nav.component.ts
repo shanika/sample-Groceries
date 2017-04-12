@@ -5,6 +5,7 @@ import "rxjs/add/operator/map";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Page} from "ui/page";
 import {Location} from "@angular/common";
+import {LoginService} from "../shared/login.service";
 
 registerElement('BottomBar', () => BottomBar);
 
@@ -29,7 +30,7 @@ export class NavComponent {
         new BottomBarItem(3, "Trips", "ic_trip", "#009688")
     ];
 
-    constructor(private location: Location,private router: Router, route: ActivatedRoute, page: Page) {
+    constructor(private location: Location,private router: Router, private userService: LoginService) {
 
         this.selectedIndex = 0;
         this.hidden = false;

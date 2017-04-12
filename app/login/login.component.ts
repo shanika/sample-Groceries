@@ -67,7 +67,9 @@ export class LoginComponent implements OnInit {
                     .subscribe( (res)=> {
                       this.userService.currentUser = res;
                       this.isLoging = false;
-                      this.router.navigate(["/nav"]);
+                      this.router.navigate(["/nav", { transition: {
+                          name : "fade"
+                      } }]);
                     }, (errorMessage) => {
                         this.isLoging = false;
                         console.log(errorMessage);

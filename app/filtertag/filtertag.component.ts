@@ -1,8 +1,6 @@
-
-
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from "@angular/core";
-import { Label } from "ui/label";
-import { StackLayout } from "ui/layouts/stack-layout";
+import {Component, OnInit, ViewChild, EventEmitter} from "@angular/core";
+import {Label} from "ui/label";
+import {StackLayout} from "ui/layouts/stack-layout";
 
 @Component({
   selector: "filter-tag", 
@@ -26,7 +24,8 @@ export class FiltertagComponent implements OnInit {
   @ViewChild("tagName") tagName: Label;
 
   constructor() {
-    this.color = this.colors[Math.floor(Math.random() * 10)];
+    //this.color = this.colors[Math.floor(Math.random() * 10)];
+    this.color = "#BDBDBD";
   }
 
   ngOnInit() {

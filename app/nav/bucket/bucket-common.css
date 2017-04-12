@@ -63,3 +63,12 @@
 .loading {
     margin-top: 60;
 }
+
+.search_black {
+    margin-left: 10;
+    margin-right: 10;
+}
+
+.search-bar {
+    background-color: #ffffff;
+}

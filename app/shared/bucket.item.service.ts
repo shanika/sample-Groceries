@@ -13,7 +13,9 @@ export class BucketItemService {
     public selectedItem: any;
     public selectedIndex: number;
     public myBucket:any = [];
+    public world:any = []
     public bucketFilters = [];
+    public worldFilters = [];
 
     constructor(private http: Http, private zone: NgZone) { 
     }

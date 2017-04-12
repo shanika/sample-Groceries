@@ -35,17 +35,25 @@ export class SearchComponent implements OnInit{
         this.searchInput.dismissSoftInput();
         if(this.mode == "bucket") {
             this.routerExtentions.navigate(["/nav/bucket"], { animated : false });
+        } else {
+            this.routerExtentions.navigate(["/nav/world"], { animated : false });
         }
     }
 
     addText(text: string){
 
-        if(text) {
-            this.service.bucketFilters.push(text.trim());
-            console.info(this.service.bucketFilters.length)
+        if(this.mode == "bucket") {
+            if(text) {
+                this.service.bucketFilters.push(text.trim());
+            }
+            this.routerExtentions.navigate(["/nav/bucket"], { animated : false });
+        } else {
+            if(text) {
+                this.service.worldFilters.push(text.trim());
+            }
+            this.routerExtentions.navigate(["/nav/world"], { animated : false });
         }
 
-        this.routerExtentions.navigate(["/nav/bucket"], { animated : false });
     }
 
 }

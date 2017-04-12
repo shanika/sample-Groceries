@@ -1,1 +1,28 @@
-<Label text="World Component"></Label>
+<AbsoluteLayout style.zIndex="100">
+    <StackLayout orientation="horizontal" opacity="0.95" width="100%" height="50" top="0" left="0" backgroundColor="#FFFFFF">
+        <Image (tap)="addSearchCriteria()" class="search_black m-t-10" src="res://ic_search_black" stretch="none"></Image>
+        <ScrollView orientation="horizontal" height="50">
+            <FlexboxLayout height="50" class="tag-container p-5">
+                <Label *ngIf="!service.worldFilters.length" text="Search by tags" (tap)="addSearchCriteria()"></Label>
+                <filter-tag *ngFor="let tag of service.worldFilters; let i = index" [name]="tag" (remove)="onRemoveTagFilter(tag,i)"></filter-tag>
+            </FlexboxLayout>
+        </ScrollView>
+    </StackLayout>
+</AbsoluteLayout>
+
+<ActivityIndicator style.zIndex="101" [busy]="loading" width="50" height="50" class="activity-indicator" ></ActivityIndicator>
+<ScrollView style.zIndex="1" class="scroll-view">
+    <FlexboxLayout *ngIf="!loading" flexWrap="wrap" justifyContent="space-between" class="p-10 item-container">
+        <FlexboxLayout *ngFor="let item of service.world; let i = index" class="item-card m-b-15" (tap)="onItemTap(item, i)">
+            <FlexboxLayout class="card-img" [style]="getImageStyle(item.img)">
+                <Label [text]="item.title" class="item-title-top" textWrap="true"></Label>
+            </FlexboxLayout>
+            <StackLayout class="item-title-container" orientation="vertical">
+                <Label text="#Rotorua, #Hicking, #Adventure" class="item-tags m-t-5 m-l-5 m-r-5" textWrap="true"></Label>
+            </StackLayout>
+            <FlexboxLayout class="item-state">
+                <Image *ngIf="item.bucketed" src="res://ic_bucket" class="m-r-5" stretch ="none" ></Image>
+            </FlexboxLayout>
+        </FlexboxLayout>
+    </FlexboxLayout>
+</ScrollView>

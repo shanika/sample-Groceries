@@ -36,21 +36,25 @@ export class NavComponent {
         this.hidden = false;
         this.titleState = TITLE_STATE.ALWAYS_SHOW;
 
+        this.selectTab();
+    }
 
-
+    private selectTab() {
         var url: string = this.router.url.split(";")[0];
-        console.info("route " + url);
+        var tabIndex: number;
         if (url == "/nav/feed") {
-            this.selectedIndex = 0;
+            tabIndex = 0;
         } else if (url == "/nav/bucket") {
-            this.selectedIndex = 1;
+            tabIndex = 1;
         } else if (url == "/nav/world") {
-            this.selectedIndex = 2;
+            tabIndex = 2;
         } else {
-            this.selectedIndex = 3;
+            tabIndex = 3;
         }
 
-        console.info("bb index " + this.selectedIndex);
+        if(tabIndex != this.selectedIndex) {
+            this.selectedIndex = tabIndex;
+        }
     }
 
     tabSelected(args: SelectedIndexChangedEventData) {

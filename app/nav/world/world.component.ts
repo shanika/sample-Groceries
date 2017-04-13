@@ -46,7 +46,7 @@ export class WorldComponent implements OnInit{
     public onItemTap(item, index) {
         this.service.selectedIndex = index;
         this.service.selectedItem = item;
-        this.router.navigate(["/bucketitem"]);
+        this.router.navigate(["/item/abc"]);
     }
 
     public onRemoveTagFilter(tag,i) {

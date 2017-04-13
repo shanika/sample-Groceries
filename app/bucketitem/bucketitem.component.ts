@@ -23,12 +23,9 @@ import { LoginService } from "../shared/login.service";
 })
 export class BucketitemComponent implements OnInit {
 
-  public image: Image;
-  public flex: FlexboxLayout;
   public busy: boolean = false;
 
-  @ViewChild("img") img: ElementRef;
-  @ViewChild("content") content: ElementRef;
+
   
   constructor(private router: Router,
               private routerExtensions: RouterExtensions, 
@@ -40,8 +37,7 @@ export class BucketitemComponent implements OnInit {
   
 
   ngOnInit() {
-    this.image = this.img.nativeElement;
-    this.flex = this.content.nativeElement;
+    this.page.actionBarHidden = true;
   }
 
   
@@ -98,16 +94,12 @@ export class BucketitemComponent implements OnInit {
     ); 
   }
 
-  onScroll(args: ScrollEventData) {
-        if (args.scrollY <= this.flex.getMeasuredHeight()) {
-            this.image.animate({
-                translate: { x: 0, y: args.scrollY * 0.3 }
-            });
-        }
-  }
-
   public goBack() {
     this.routerExtensions.backToPreviousPage();
+  }
+
+  public getImageStyle(img) {
+    return "background-image: url('" + img + "');"
   }
   
 }

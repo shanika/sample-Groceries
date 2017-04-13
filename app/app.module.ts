@@ -8,7 +8,6 @@ import {AppComponent} from "./app.component";
 import {setStatusBarColors, BackendService, LoginService} from "./shared";
 
 import {LoginModule} from "./login/login.module";
-import {MybucketModule} from "./mybucket/mybucket.module";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {NavComponent} from "./nav/nav.component";
@@ -19,6 +18,7 @@ import {TripsComponent} from "./nav/trips/trips.component";
 import {SearchComponent} from "./search/search.component";
 import {FiltertagComponent} from "./filtertag/filtertag.component";
 import {BucketItemService} from "./shared/bucket.item.service";
+import {BucketitemComponent} from "./bucketitem/bucketitem.component";
 
 setStatusBarColors();
 
@@ -44,7 +44,8 @@ setStatusBarColors();
         WorldComponent,
         TripsComponent,
         SearchComponent,
-        FiltertagComponent
+        FiltertagComponent,
+        BucketitemComponent
     ],
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA]

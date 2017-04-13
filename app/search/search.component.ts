@@ -5,6 +5,8 @@ import {BucketItemService} from "../shared/bucket.item.service";
 import {Page} from "ui/page";
 import {TextField} from "ui/text-field";
 
+var color = require("color");
+
 @Component({
     selector: "search-page",
     moduleId: module.id,
@@ -26,7 +28,10 @@ export class SearchComponent implements OnInit{
 
     constructor(route: ActivatedRoute,
                 private routerExtentions: RouterExtensions,
-                private service: BucketItemService) {
+                private service: BucketItemService,
+                private page: Page
+    ) {
+        page.backgroundColor = new color.Color('#006968');
         route.params.map( r => r["mode"]).subscribe( mode => this.mode = mode );
     }
 

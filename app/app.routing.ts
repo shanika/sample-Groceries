@@ -5,6 +5,7 @@ import {BucketComponent} from "./nav/bucket/bucket.component";
 import {WorldComponent} from "./nav/world/world.component";
 import {TripsComponent} from "./nav/trips/trips.component";
 import {SearchComponent} from "./search/search.component";
+import {BucketitemComponent} from "./bucketitem/bucketitem.component";
 
 export const authProviders = [
     AuthGuard
@@ -12,7 +13,6 @@ export const authProviders = [
 
 export const appRoutes = [
     {path: "", redirectTo: "/login", pathMatch: "full"},
-    {path: "search/:mode", component : SearchComponent },
     {
         path: "nav", component: NavComponent,
         children: [
@@ -22,5 +22,7 @@ export const appRoutes = [
             {path: "world", component: WorldComponent},
             {path: "trips", component: TripsComponent}
         ]
-    }
+    },
+    {path: "search/:mode", component : SearchComponent },
+    {path: "item/:code", component : BucketitemComponent }
 ];

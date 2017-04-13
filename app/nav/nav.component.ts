@@ -2,10 +2,10 @@ import {Component} from "@angular/core";
 import {registerElement} from "nativescript-angular";
 import {BottomBar, BottomBarItem, TITLE_STATE, SelectedIndexChangedEventData} from "nativescript-bottombar";
 import "rxjs/add/operator/map";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Page} from "ui/page";
-import {Location} from "@angular/common";
-import {LoginService} from "../shared/login.service";
+
+var color = require("color");
 
 registerElement('BottomBar', () => BottomBar);
 
@@ -30,8 +30,9 @@ export class NavComponent {
         new BottomBarItem(3, "Trips", "ic_trip", "#009688")
     ];
 
-    constructor(private router: Router) {
+    constructor(private router: Router, private page: Page) {
 
+        page.backgroundColor = new color.Color('#006968');
         this.selectedIndex = 0;
         this.hidden = false;
         this.titleState = TITLE_STATE.ALWAYS_SHOW;

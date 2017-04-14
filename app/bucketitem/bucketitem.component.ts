@@ -1,32 +1,27 @@
-
-
-
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { Router } from "@angular/router";
-import { Page } from "ui/page";
+import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
+import {Page} from "ui/page";
 import * as dialogs from "ui/dialogs";
-
+import {BucketItemService} from "../shared/bucket.item.service";
+import {RouterExtensions} from "nativescript-angular/router";
+import {LoginService} from "../shared/login.service";
 import firebase = require("nativescript-plugin-firebase");
-import { BucketItemService } from "../shared/bucket.item.service";
-import { Image } from "ui/image";
-import { FlexboxLayout } from "ui/layouts/flexbox-layout";
-import { ScrollEventData } from "ui/scroll-view";
-import { RouterExtensions } from "nativescript-angular/router";
-import { LoginService } from "../shared/login.service";
 
+const ADD_ICON: string = "res://ic_add";
+const BUCKET_ICON: string = "res://ic_bucket_white";
+const CHECK_ICON: string = "res://ic_check_white";
 
 @Component({
-  selector: "bucket-item", 
-  moduleId: module.id,
-  templateUrl: "./bucketitem.component.html",
-  styleUrls: ["./bucketitem-common.css", "./bucketitem.component.css"]
+selector: "bucket-item",
+moduleId: module.id,
+templateUrl: "./bucketitem.component.html",
+styleUrls: ["./bucketitem-common.css", "./bucketitem.component.css"]
 })
 export class BucketitemComponent implements OnInit {
 
   public busy: boolean = false;
+  public actionIcon: string = ADD_ICON;
 
-
-  
   constructor(private router: Router,
               private routerExtensions: RouterExtensions, 
               private page: Page,
@@ -38,8 +33,14 @@ export class BucketitemComponent implements OnInit {
 
   ngOnInit() {
     this.page.actionBarHidden = true;
+    if(this.service.selectedItem.bucketed) {
+      if(this.service.selectedItem.checked) {
+        this.actionIcon = CHECK_ICON;
+      } else {
+        this.actionIcon = BUCKET_ICON;
+      }
+    }
   }
-
   
   public onLogout() {
     console.info("Loged out");
@@ -61,8 +62,9 @@ export class BucketitemComponent implements OnInit {
     });
   }
 
-  public addToBucket(){ 
+  private addToBucket(){
     this.busy = true;
+    this.actionIcon = BUCKET_ICON;
     this.service.addToBucket(this.userService.currentUser, this.service.selectedItem)
     .subscribe(
       () => {
@@ -78,8 +80,9 @@ export class BucketitemComponent implements OnInit {
     );
   }
 
-  public removeFromBucket(){ 
+  private removeFromBucket(){
     this.busy = true;
+    this.actionIcon = ADD_ICON;
     this.service.removeFromBucket(this.userService.currentUser, this.service.selectedItem)
     .subscribe(
       () => {
@@ -92,6 +95,16 @@ export class BucketitemComponent implements OnInit {
         console.error("Failed to remove item to bucket");
       }
     ); 
+  }
+
+  public addRemoveItem() {
+    if(!this.service.selectedItem.checked) {
+      if(this.service.selectedItem.bucketed) {
+        this.removeFromBucket();
+      } else {
+        this.addToBucket();
+      }
+    }
   }
 
   public goBack() {

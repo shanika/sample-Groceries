@@ -3,8 +3,8 @@
         <FlexboxLayout class="item-image" flexDirection="column" [style]="getImageStyle(service.selectedItem.img)">
         </FlexboxLayout>
         <FlexboxLayout flexDirection="row-reverse" class="action-button-container">
-            <StackLayout class="fab-container">
-                <Image src="res://ic_add" stretch ="none" class="action-button-icon"></Image>
+            <StackLayout (tap)="addRemoveItem()" class="fab-container">
+                <Image [src]="actionIcon" stretch ="none" class="action-button-icon"></Image>
             </StackLayout>
         </FlexboxLayout>
         <FlexboxLayout #content style.zIndex="2" flexDirection="column">
@@ -25,7 +25,6 @@
     </FlexboxLayout>
 </AbsoluteLayout>
 
-Y
 
 
 

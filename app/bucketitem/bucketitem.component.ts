@@ -7,6 +7,8 @@ import {RouterExtensions} from "nativescript-angular/router";
 import {LoginService} from "../shared/login.service";
 import firebase = require("nativescript-plugin-firebase");
 
+var nstoasts = require("nativescript-toasts");
+
 const ADD_ICON: string = "res://ic_add";
 const BUCKET_ICON: string = "res://ic_bucket_white";
 const CHECK_ICON: string = "res://ic_check_white";
@@ -72,6 +74,13 @@ export class BucketitemComponent implements OnInit {
         this.busy = false;
         this.service.myBucket.push(this.service.selectedItem);
         this.service.selectedIndex = this.service.myBucket.length - 1;
+
+        var options = {
+          text: "Item added to Bucket List",
+          duration : nstoasts.DURATION.SHORT,
+          position : nstoasts.POSITION.CENTER
+        }
+        nstoasts.show(options);
       },
       () => {
         this.busy = false;
@@ -89,6 +98,12 @@ export class BucketitemComponent implements OnInit {
         this.service.selectedItem['bucketed'] = false;
         this.busy = false;
         this.service.myBucket.splice(this.service.selectedIndex, 1);
+        var options = {
+          text: "Item removed from Bucket List",
+          duration : nstoasts.DURATION.SHORT,
+          position : nstoasts.POSITION.CENTER
+        }
+        nstoasts.show(options);
       },
       () => {
         this.busy = false;

@@ -3,6 +3,7 @@ import {BucketItemService} from "../../shared/bucket.item.service";
 import {LoginService} from "../../shared/login.service";
 import {Router} from "@angular/router";
 import {RouterExtensions} from "nativescript-angular";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
     selector: "nav-world",
@@ -23,7 +24,8 @@ export class WorldComponent implements OnInit{
 
     ngOnInit() {
 
-        if(!this.service.world.length) {
+        if(this.service.refilterWorld || !this.service.world.length) {
+            this.service.refilterWorld = false;
             this.loadItems();
         }
     }
@@ -31,7 +33,7 @@ export class WorldComponent implements OnInit{
     public loadItems() {
 
         this.loading = true;
-        this.service.getItems(this.userService.currentUser.uid, "").subscribe(
+        this.service.filterItems(this.userService.currentUser.uid, this.service.worldFilters).subscribe(
             (res) => {
                 this.service.world = res;
                 this.loading = false;
@@ -62,5 +64,13 @@ export class WorldComponent implements OnInit{
 
     public getImageStyle(img) {
         return "background-image: url('" + img + "');"
+    }
+
+    public getTags(tags){
+        let tagsStr = ""
+        tags.forEach( (tag) => {
+            tagsStr += '#' + tag.name + ' ';
+        });
+        return tagsStr;
     }
 }

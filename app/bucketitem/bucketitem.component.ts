@@ -55,12 +55,46 @@ export class BucketitemComponent implements OnInit {
       title: "Select Action",
       message: "Choose your acion",
       cancelButtonText: "Cancel",
-      actions: ["Logout"]
+      actions: ["Add Tag", "Check Bucket Item"]
     };
     dialogs.action(options).then((result) => {
-      if(result === "Logout"){
-        this.onLogout()
+      if(result === "Check Bucket Item"){
+        this.checkIn();
+      } else if (result === "Add Tag") {
+        this.addTag();
       }
+    });
+  }
+
+  private addTag(){
+    let options = {
+      title: "Tag",
+      defaultText: "",
+      inputType: dialogs.inputType.text,
+      okButtonText: "Add",
+      cancelButtonText: "Cancel"
+    };
+    dialogs.prompt(options).then((result: dialogs.PromptResult) => {
+      this.service.addTag(this.service.selectedItem, "#" + result.text.trim())
+          .subscribe(
+              () => {
+                this.service.selectedItem.tags.push({
+                  name : result.text,
+                  isGeo : false,
+                  isCommon: true
+                });
+
+                var options = {
+                  text: "Tag " + result.text + " added",
+                  duration : nstoasts.DURATION.SHORT,
+                  position : nstoasts.POSITION.CENTER
+                }
+                nstoasts.show(options);
+              },
+              () => {
+                console.error("Failed to add a tag");
+              }
+          );
     });
   }
 
@@ -87,6 +121,25 @@ export class BucketitemComponent implements OnInit {
         console.error("Failed to add item to bucket");
       }
     );
+  }
+
+  private checkIn() {
+    this.service.checkIn(this.userService.currentUser, this.service.selectedItem)
+        .subscribe(
+            () => {
+              this.service.selectedItem['checked'] = true;
+              this.actionIcon = CHECK_ICON;
+              var options = {
+                text: "Item checked in your Bucket List",
+                duration : nstoasts.DURATION.SHORT,
+                position : nstoasts.POSITION.CENTER
+              }
+              nstoasts.show(options);
+            },
+            () => {
+              console.error("Failed to check in item in bucket");
+            }
+        );
   }
 
   private removeFromBucket(){

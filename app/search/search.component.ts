@@ -55,6 +55,7 @@ export class SearchComponent implements OnInit{
         } else {
             if(text) {
                 this.service.worldFilters.push(text.trim());
+                this.service.refilterWorld = true;
             }
             this.routerExtentions.navigate(["/nav/world"], { animated : false });
         }

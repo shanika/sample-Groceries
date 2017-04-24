@@ -1,5 +1,3 @@
-
-
 import { Injectable, NgZone } from "@angular/core";
 import { Http, Headers, RequestOptions } from "@angular/http";
 import {Observable} from 'rxjs/Rx';
@@ -13,9 +11,10 @@ export class BucketItemService {
     public selectedItem: any;
     public selectedIndex: number;
     public myBucket:any = [];
-    public world:any = []
+    public world:any = [];
+    public refilterWorld: boolean = false;
     public bucketFilters = [];
-    public worldFilters = [];
+    public worldFilters = ["New Zealand"];
 
     constructor(private http: Http, private zone: NgZone) { 
     }
@@ -30,12 +29,42 @@ export class BucketItemService {
         .catch(this.handleErrors); 
     }
 
+    public filterItems(uid, filters) {
+        console.info("Inside service");
+        let headers = this.getHeaders();
+        return this.http.get(BackendService.apiUrl + "/items?uid=" + uid + "&tags=" + filters.join(',').replace(" ", "%20"), {
+            "headers": headers
+        })
+        .map(res => res.json())
+        .catch(this.handleErrors);
+    }
+
     public addToBucket(user, item) {
         let headers = this.getHeaders();
         let options = new RequestOptions({ headers: headers });
         return this.http.post( BackendService.apiUrl + "/users/" + user.uid + "/items/"  + item.id, {}, options)
             .map(res => res.json())
             .catch(this.handleErrors); ;
+    }
+
+    public checkIn(user, item) {
+        let headers = this.getHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post( BackendService.apiUrl + "/users/" + user.uid + "/event/checkIn/"  + item.id, {}, options)
+            .map(res => res.json())
+            .catch(this.handleErrors);
+    }
+
+    public addTag(item, tags) {
+        let headers = this.getHeaders();
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post( BackendService.apiUrl + "/items/" + item.id + "/tags", {
+                                                                                            "isGeo": true,
+                                                                                            "tags": tags
+                                                                                        },
+            options)
+            .map(res => res.json())
+            .catch(this.handleErrors);
     }
 
     public removeFromBucket(user, item) {

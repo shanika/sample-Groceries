@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {BucketItemService} from "../../shared/bucket.item.service";
 
 @Component({
     selector: "nav-feed",
@@ -8,11 +9,25 @@ import {Component, OnInit} from "@angular/core";
 })
 export class FeedComponent implements OnInit{
 
+    private actions = [];
+
     ngOnInit(): void {
-        console.info("Feed component loaded");
+        this.loadActions();
     }
 
-    constructor() {
+    constructor(private service: BucketItemService) {
 
+    }
+
+    private loadActions() {
+        this.service.loadActions().subscribe( (actions) => {
+            this.actions = actions;
+        }, ()=> {
+            console.info("Unable to load actions");
+        });
+    }
+
+    public getImageStyle(img) {
+        return "background-image: url('" + img + "');"
     }
 }

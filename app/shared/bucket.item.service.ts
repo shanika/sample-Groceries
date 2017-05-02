@@ -75,6 +75,16 @@ export class BucketItemService {
             .catch(this.handleErrors);
     }
 
+    loadActions() {
+
+        let headers = this.getHeaders();
+        return this.http.get(BackendService.apiUrl + "/actions", {
+            "headers": headers
+        })
+            .map(res => res.json())
+            .catch(this.handleErrors);
+    }
+
     private getHeaders() {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
@@ -84,6 +94,5 @@ export class BucketItemService {
     private handleErrors(error: Response) {
         console.log(error);
         return Observable.throw(error);
-    } 
-
+    }
 }

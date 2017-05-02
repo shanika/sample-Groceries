@@ -1,1 +1,16 @@
-<Label text="Feed Component"></Label>
+<ScrollView class="activity-feed">
+    <StackLayout orientation="vertical">
+        <StackLayout class="activity" *ngFor="let action of actions" orientation="vertical">
+            <StackLayout orientation="horizontal">
+                <Image class="profile-pic" [src]="action.userImg"></Image>
+                <StackLayout orientation="vertical">
+                    <Label class="activity-user" [text]="action.userName"></Label>
+                    <Label class="activity-label" text="Checked a bucket item"></Label>
+                </StackLayout>
+            </StackLayout>
+            <FlexboxLayout [style]="getImageStyle(action.itemImg)" class="card-img">
+                <Label [text]="action.itemName" class="item-title-top" textWrap="true"></Label>
+            </FlexboxLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>
